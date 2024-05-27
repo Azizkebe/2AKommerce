@@ -23,6 +23,16 @@
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </button>
             </form>
+            <div style="margin-left: 1rem;">
+                <li class="nav-item dropdown" style="list-style-type: none;">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Compte</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#!">Creer Un Compte</a></li>
+                        <li><a class="dropdown-item" href="#!">Se Connecter</a></li>
+                    </ul>
+                </li>
+            </div>
         </div>
     </div>
 </nav>

@@ -16,8 +16,17 @@
     <body>
         <!-- Navigation-->
         @include('layouts.inc.navbar')
-        <!-- Header-->
-        @include('layouts.inc.header')
+           <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Shop in style</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+                </div>
+            </div>
+        </header>
+           <!-- End Header -->
+
          <!-- Contenu des information-->
                 @yield('content')
         <!-- Fin du Content des information-->
