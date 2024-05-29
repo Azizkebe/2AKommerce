@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class HandleRequest extends FormRequest
+class HandloginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,18 +22,15 @@ class HandleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
-            'email'=>'required|unique:users,email',
-            'password'=>'required|min:4',
+            'email'=>'required|exists:users,email',
+            'password'=>'required',
         ];
     }
     public function messages(): array{
         return [
-            'name.required'=>'Mettez votre nom et prenom',
             'email.required'=>'Email est requis',
-            'email.unique'=>'Email existe déjà',
+            'email.exists'=>'L\'adresse email saisie n\'est pas reconnue',
             'password.required'=>'le mot de passe est requis',
-            'password.min'=>'Email doit etre au minimum 4 quatre caracteres',
         ];
     }
 }
