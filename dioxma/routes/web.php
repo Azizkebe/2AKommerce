@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserAuthController;
 use App\Http\Controllers\Vendor\VendorAuthController;
 use App\Http\Controllers\Vendor\VendorDashboard;
+use App\Http\Controllers\Vendor\Product\ProductController;
 
 
 Route::get('/', function () {
@@ -37,6 +38,13 @@ Route::prefix('vendor/account')->group(function(){
 // Redirect Vendor connecte
 Route::middleware('vendor_middleware')->prefix('vendor/dashboard')->group(function(){
     Route::get('/',[VendorDashboard::class, 'index'])->name('vendor.dashboard');
+
+    Route::prefix('article')->group(function(){
+        Route::get('/',[ProductController::class,'create'])->name('article.create');
+        Route::get('/liste',[ProductController::class,'liste'])->name('article.liste');
+
+    });
+
 
     Route::get('/deconnexion',[VendorDashboard::class,'deconnexion'])->name('vendor.deconnexion');
 

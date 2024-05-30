@@ -10,7 +10,7 @@ class VendorDashboard extends Controller
 {
     public function index()
     {
-        dd('Vendeur Connecté');
+        return view('dashboard.vendors.home');
     }
 
     public function deconnexion()
