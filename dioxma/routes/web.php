@@ -37,4 +37,7 @@ Route::prefix('vendor/account')->group(function(){
 // Redirect Vendor connecte
 Route::middleware('vendor_middleware')->prefix('vendor/dashboard')->group(function(){
     Route::get('/',[VendorDashboard::class, 'index'])->name('vendor.dashboard');
+
+    Route::get('/deconnexion',[VendorDashboard::class,'deconnexion'])->name('vendor.deconnexion');
+
 });
