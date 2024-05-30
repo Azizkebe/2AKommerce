@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserAuthController;
 use App\Http\Controllers\Vendor\VendorAuthController;
+use App\Http\Controllers\Vendor\VendorDashboard;
 
 
 Route::get('/', function () {
@@ -26,8 +27,14 @@ Route::get('/deconnexion',[UserAuthController::class,'deconnexion'])->name('user
 
 //Route pour les vendors
 Route::prefix('vendor/account')->group(function(){
-    Route::get('/login',[VendorAuthController::class, 'login'])->name('vendor.login');
-    Route::post('/login',[VendorAuthController::class,'handlogin'])->name('vendor.handlogin');
+
     Route::get('/register',[VendorAuthController::class, 'register'])->name('vendor.register');
     Route::post('/register',[VendorAuthController::class,'handregister'])->name('vendor.handregister');
+
+    Route::get('/login',[VendorAuthController::class, 'login'])->name('vendor.login');
+    Route::post('/login',[VendorAuthController::class,'handlogin'])->name('vendor.handlogin');
+});
+// Redirect Vendor connecte
+Route::middleware('vendor_middleware')->prefix('vendor/dashboard')->group(function(){
+    Route::get('/',[VendorDashboard::class, 'index'])->name('vendor.dashboard');
 });

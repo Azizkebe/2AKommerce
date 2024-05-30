@@ -23,6 +23,7 @@ class VendorAuthController extends Controller
     {
 
         try {
+
             Vendor::create([
                 'name'=>$request->name,
                 'email'=>$request->email,
@@ -30,7 +31,9 @@ class VendorAuthController extends Controller
 
             ]);
             return redirect()->back()->with('success','Le compte du vendor est crée avec succes');
-        } catch (Exception $e) {
+
+        }
+        catch (Exception $e) {
             throw new Exception("Erreur survenue lors de la creation du compte du vendor", 1);
 
         }
@@ -38,14 +41,16 @@ class VendorAuthController extends Controller
     public function handlogin(HandLoginVendorRequest $request)
     {
         try {
-            if(auth::attempt($request->only('email','password')))
-            {
 
+            if(auth('vendor')->attempt($request->only('email','password')))
+            {
+                return redirect()->route('vendor.dashboard');
             }
             else{
                 return redirect()->back()->with('error','Les parametres saisies sont incorrectes');
             }
-        } catch (\Throwable $e) {
+        }
+        catch (Exception $e) {
 
             throw new Exception("Erreur survenue lors de la connexion", 1);
 

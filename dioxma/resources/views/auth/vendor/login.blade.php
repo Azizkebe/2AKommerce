@@ -12,8 +12,6 @@
         <div class="card my-5 mt-2">
             @if (session('error'))
                 <div class="alert alert-danger">
-                    <button type="button" class="close" data-dismiss="alert"
-                    aria-hidden="true">x</button>
                     {{session('success')}}
                 </div>
             @endif
