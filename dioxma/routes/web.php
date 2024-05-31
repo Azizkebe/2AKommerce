@@ -40,7 +40,8 @@ Route::middleware('vendor_middleware')->prefix('vendor/dashboard')->group(functi
     Route::get('/',[VendorDashboard::class, 'index'])->name('vendor.dashboard');
 
     Route::prefix('article')->group(function(){
-        Route::get('/',[ProductController::class,'create'])->name('article.create');
+        Route::get('/create',[ProductController::class,'create'])->name('article.create');
+        Route::post('/create',[ProductController::class,'store'])->name('article.store');
         Route::get('/liste',[ProductController::class,'liste'])->name('article.liste');
 
     });

@@ -2,48 +2,36 @@
 
 @section('content')
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Mes Produtis</h1>
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item">
-               <a href="" class="btn btn-primary btn-sm" >Ajouter un Produit</a>
-            </li>
-        </ol>
+        <h1 class="mt-4">Liste des Produits</h1>
         <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                <a href="" class="btn btn-primary btn-sm" style="display:flex; justify-content:flex-end;">Ajouter un Produit</a>
+            <div class="card-header" style="display:flex; justify-content:flex-end;">
+                <a href="{{route('article.create')}}" class="btn btn-primary btn-sm" >Ajouter un Produit</a>
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Libelle du Produit</th>
+                            <th>Description du Produit</th>
+                            <th>Price</th>
+                            <th>Disponibilite</th>
+                            <th>Action</th>
+
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                        </tr>
-                    </tfoot>
+
                     <tbody>
+                        @foreach ($products as $product)
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
+                            <td>{{$product->name}}</td>
+                            <td>{{$product->description}}</td>
+                            <td>{{$product->price}}</td>
+                            <td>{{$product->active ? 'Disponible' : 'Rupture de stock'}}</td>
+                            <td></td>
+
                         </tr>
+                        @endforeach
+
 
                     </tbody>
                 </table>
