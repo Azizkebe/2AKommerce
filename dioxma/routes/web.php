@@ -5,11 +5,10 @@ use App\Http\Controllers\User\UserAuthController;
 use App\Http\Controllers\Vendor\VendorAuthController;
 use App\Http\Controllers\Vendor\VendorDashboard;
 use App\Http\Controllers\Vendor\Product\ProductController;
+use App\Http\Controllers\WebsiteController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/',[WebsiteController::class,'index'])->name('welcome');
 
 Route::middleware('guest')->group(function(){
         // Enregistrement User

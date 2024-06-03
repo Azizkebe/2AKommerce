@@ -11,6 +11,7 @@
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Libelle du Produit</th>
                             <th>Description du Produit</th>
                             <th>Price</th>
@@ -23,6 +24,20 @@
                     <tbody>
                         @foreach ($products as $product)
                         <tr>
+
+                            <td>
+                               @if ($product->image)
+                                   <div style="background-image: url('{{asset('storage/'.
+                                   $product->image->path)}}');
+                                   width:50px;
+                                   height:50px;
+                                   background-position:center;
+                                   background-size:cover;
+                                   ">
+                                   </div>
+                               @endif
+                            </td>
+
                             <td>{{$product->name}}</td>
                             <td>{{$product->description}}</td>
                             <td>{{$product->price}}</td>
@@ -31,8 +46,6 @@
 
                         </tr>
                         @endforeach
-
-
                     </tbody>
                 </table>
             </div>

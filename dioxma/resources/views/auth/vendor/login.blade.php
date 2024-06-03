@@ -24,7 +24,7 @@
                 <h2 class="text-center text-dark mt-1">Espace Connexion - Vendeur</h2>
             </div>
             <div class="text-center">
-              <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+              <img src="{{asset('ressources/img/shop-logo.png')}}" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
                 width="200px" alt="profile">
             </div>
             <div class="mb-3">

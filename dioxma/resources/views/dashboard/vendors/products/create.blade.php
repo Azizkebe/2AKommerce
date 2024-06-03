@@ -25,8 +25,11 @@
                 @csrf
 
                 <div class="form-group mb-2">
-                    <label for="">Nom du Produit</label>
+                    <label for="">Libellé du Produit</label>
                     <input type="text" class="form-control" name="name">
+                    @error('name')
+                        <div style="color:red;">{{$message}}</div>
+                    @enderror
                 </div>
                 <div class="form-control mb-2">
                     <label for="">Ajouter la photo du Produit</label>
@@ -39,6 +42,9 @@
                 <div class="form-group mb-2">
                     <label for="">Prix du Produit</label>
                     <input type="number" class="form-control" name="price">
+                    @error('price')
+                       <div style="color:red;">{{$message}}</div>
+                    @enderror
                 </div>
                 <div class="form-group mb-2">
                     <input type="submit" class="btn btn-primary" value="Enregistrer le Produit">
