@@ -34,6 +34,11 @@
                     </ul>
                 </li>
             </div>
+            {{-- <div style="margin-left: 1rem;">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown3" href="{{route('pay.create')}}">Configuration</a>
+                </li>
+            </div> --}}
             @endguest
             @auth
                 <a style="margin-left:1rem;" href="{{route('user.deconnexion')}}" class="btn btn-danger">Deconnexion</a>

@@ -5,6 +5,7 @@ use App\Http\Controllers\User\UserAuthController;
 use App\Http\Controllers\Vendor\VendorAuthController;
 use App\Http\Controllers\Vendor\VendorDashboard;
 use App\Http\Controllers\Vendor\Product\ProductController;
+use App\Http\Controllers\Vendor\Product\PaiementController;
 use App\Http\Controllers\WebsiteController;
 
 
@@ -43,6 +44,10 @@ Route::middleware('vendor_middleware')->prefix('vendor/dashboard')->group(functi
         Route::post('/create',[ProductController::class,'store'])->name('article.store');
         Route::get('/liste',[ProductController::class,'liste'])->name('article.liste');
 
+    });
+    Route::prefix('paiement')->group(function(){
+        Route::get('/create',[PaiementController::class, 'index'])->name('config.create');
+        Route::post('/handcreate',[PaiementController::class, 'store'])->name('config.store');
     });
 
 

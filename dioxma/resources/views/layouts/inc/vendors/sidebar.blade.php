@@ -51,6 +51,10 @@
                     </nav>
                 </div>
                 <div class="sb-sidenav-menu-heading">Transactions</div>
+                <a class="nav-link" href="{{route('config.create')}}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                    Configuration
+                </a>
                 <a class="nav-link" href="charts.html">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Paiement
