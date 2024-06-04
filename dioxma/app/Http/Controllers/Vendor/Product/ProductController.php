@@ -16,7 +16,7 @@ class ProductController extends Controller
 {
     public function liste()
     {
-        $product = Product::latest()->with('image')->get();
+        $product = Product::where('vendor_id',auth('vendor')->user()->id)->latest()->with('image')->get();
         return view('dashboard.vendors.products.liste',[
             'products'=> $product,
         ]);
@@ -41,7 +41,7 @@ class ProductController extends Controller
             $this->handleImageUpload($products,$request,'image','CloudFile/Products','cloudfile_id');
 
 
-            return redirect()->back()->with('success','Le produit à été ajouté avec succes');
+            return redirect()->route('article.liste')->with('success','Le produit à été ajouté avec succes');
             DB::commit();
 
         } catch (Exception $e) {
