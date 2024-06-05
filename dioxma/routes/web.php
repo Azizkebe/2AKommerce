@@ -46,6 +46,8 @@ Route::middleware('vendor_middleware')->prefix('vendor/dashboard')->group(functi
         Route::get('/create',[ProductController::class,'create'])->name('article.create');
         Route::post('/create',[ProductController::class,'store'])->name('article.store');
         Route::get('/liste',[ProductController::class,'liste'])->name('article.liste');
+        Route::get('edit/{article}',[ProductController::class,'edit'])->name('article.edit');
+        Route::put('update/{article}',[ProductController::class,'update'])->name('article.update');
 
     });
     Route::prefix('paiement')->group(function(){

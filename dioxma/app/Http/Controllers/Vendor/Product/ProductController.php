@@ -67,5 +67,41 @@ class ProductController extends Controller
             $data->update();
         }
     }
+    public function edit(int $id)
+    {
+        $product = Product::findOrFail($id);
+
+        return view('dashboard.vendors.products.edit',[
+            'product'=> $product,
+        ]);
+    }
+    public function update(int $id)
+    {
+
+    $productupdate = Product::findOrFail($id);
+        try {
+            DB::beginTransaction();
+    $productData = [
+        $productupdate->name => $request->name,
+        $productupdate->description => $request->description,
+        $productupdate->price => $request->price,
+        $productupdate->price => auth('vendor')->user()->id,
+
+    ];
+    // dd($request);
+    $products = Product::update($productData);
+    $this->handleImageUpload($products,$request,'image','CloudFile/Products','cloudfile_id');
+
+
+    return redirect()->route('article.liste')->with('success','Le produit à été ajouté avec succes');
+    DB::commit();
+
+} catch (Exception $e) {
+    DB::rollback();
+
+    return redirect()->back()->with('error', $e->getMessage());
+    // throw new Exception("Erreur survenue lors de la modification", $e->getMessage());
+}
+    }
 
 }

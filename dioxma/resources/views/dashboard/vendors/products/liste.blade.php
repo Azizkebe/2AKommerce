@@ -42,7 +42,9 @@
                             <td>{{$product->description}}</td>
                             <td>{{$product->price}}</td>
                             <td>{{$product->active ? 'Disponible' : 'Rupture de stock'}}</td>
-                            <td></td>
+                            <td>
+                                <a href="{{route('article.edit',$product->id)}}"><span class="fa fa-edit"></span></a>
+                            </td>
 
                         </tr>
                         @endforeach
