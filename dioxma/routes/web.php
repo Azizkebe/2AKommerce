@@ -6,6 +6,7 @@ use App\Http\Controllers\Vendor\VendorAuthController;
 use App\Http\Controllers\Vendor\VendorDashboard;
 use App\Http\Controllers\Vendor\Product\ProductController;
 use App\Http\Controllers\Vendor\Product\PaiementController;
+use App\Http\Controllers\Vendor\Product\UserPaymentController;
 use App\Http\Controllers\WebsiteController;
 
 
@@ -21,6 +22,8 @@ Route::middleware('guest')->group(function(){
 });
 
 Route::middleware('auth')->group(function(){
+
+    Route::get('/product/order/{id}',[UserPaymentController::class,'initPayment'])->name('order.payment');
 // Deconnexion
 Route::get('/deconnexion',[UserAuthController::class,'deconnexion'])->name('user.deconnexion');
 
