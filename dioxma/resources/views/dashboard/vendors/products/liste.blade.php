@@ -41,9 +41,31 @@
                             <td>{{$product->name}}</td>
                             <td>{{$product->description}}</td>
                             <td>{{$product->price}}</td>
-                            <td>{{$product->active ? 'Disponible' : 'Rupture de stock'}}</td>
+                            <td>
+                                <form action="{{route('article.status', $product->id)}}" method="POST">
+                                    @method('PUT')
+                                    @csrf
+
+                                    <a href="" type="submit" class="btn btn-sm btn-{{$product->active ? 'success' : 'danger'}}">
+                                        {{$product->active ? 'Disponible' : 'Non disponible'}}
+                                    </a>
+                                    {{--
+                                    <input type="checkbox" name="status" {{$product->active == '1' ? 'checked' : ''}}>
+                                    <label for="">{{$product->active ? 'Disponible' : 'Non disponible'}}</label> --}}
+
+                                    {{-- <div>
+                                        <a href="" type="submit" class="btn btn-sm btn-{{$product->active ? 'success' : 'danger'}}">
+                                            {{$product->active ? 'Disponible' : 'Non disponible'}}
+                                        </a>
+                                    </div> --}}
+                                </form>
+
+
+                            </td>
                             <td>
                                 <a href="{{route('article.edit',$product->id)}}"><span class="fa fa-edit"></span></a>
+                                &nbsp;&nbsp;&nbsp;<a onclick="return confirm('Etes-vous sur de vouloir supprimer le produit ?')"
+                                 href="{{route('article.delete', $product->id)}}"><span class="fa fa-trash"> </span></a>
                             </td>
 
                         </tr>

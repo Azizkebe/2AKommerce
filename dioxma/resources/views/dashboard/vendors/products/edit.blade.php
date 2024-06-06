@@ -38,6 +38,7 @@
                         <img style="width: 50px; height:50px;" src="{{asset('storage/'.
                         $product->image->path)}}" alt="">
                         <a href="{{url('vendor/dashboard/article/delete/'.$product->id)}}">Supprimer</a>
+                        {{-- <a href="{{url('vendor/dashboard/article/delete/'.$product->id)}}">Supprimer</a> --}}
                     </div>
                     {{-- <div style="background-image: url('{{asset('storage/'.
                     $product->image->path)}}');

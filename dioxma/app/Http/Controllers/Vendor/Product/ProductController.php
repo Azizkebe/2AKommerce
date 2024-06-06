@@ -36,6 +36,7 @@ class ProductController extends Controller
                 'price'=> $request->price,
                 'vendor_id' => auth('vendor')->user()->id,
 
+
             ];
             // dd($request);
             $products = Product::create($productData);
@@ -87,7 +88,14 @@ class ProductController extends Controller
         $productupdate->description = $request->description;
         $productupdate->price = $request->price;
         $productupdate->vendor_id = auth('vendor')->user()->id;
+        if($productupdate->active)
+        {
+            $productupdate->update(['active', '1']);
+        }
+        else{
+            $productupdate->update(['active', '0']);
 
+        }
     // ];
     // dd($request);
 
@@ -108,17 +116,45 @@ class ProductController extends Controller
     public function destroy_image(int $path_image)
     {
         $deleteImage = CloudFile::findOrFail($path_image);
+        $productdata = Product::findOrFail($path_image);
 
-        if(File::exists($deleteImage->path))
+
+
+        // dd($productdata);
+
+        if($deleteImage->path) {
+
+            $deleteImage->delete();
+
+            $productdata->update(['cloudfile_id'=>$deleteImage->id]);
+
+
+            return redirect()->route('article.edit',$productdata->id)->with('success','Image du produit a été supprimé');
+
+        }
+        else
         {
-            // dd("oui");
-            File::delete($deleteImage->path);
+            return redirect()->route('article.edit',$productdata->id)->with('success','Image du produit a été supprimé');
+
         }
 
-        $deleteImage->delete();
+        return redirect()->route('article.edit',$productdata->id)->with('success','Image du produit a été supprimé');
 
-        // dd('supprimé');
-        return redirect()->back()->with('success','Image du produit a été supprimé');
+    }
+    public function update_status (int $id, Request $request)
+    {
+        $product = Product::findOrFail($id);
+
+        dd($request);
+
+    }
+    public function delete(int $article)
+    {
+        $productDat = Product::findOrFail($article);
+
+        $productDat->delete();
+
+        return redirect()->back()->with('success','Le produit a été supprimé avec succes');
     }
 
 }
