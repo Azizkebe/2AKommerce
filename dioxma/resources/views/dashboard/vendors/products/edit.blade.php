@@ -31,16 +31,28 @@
                         <div style="color:red;">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="form-control mb-2">
-                    <label for="">Ajouter la photo du Produit</label>
-                   <div style="background-image: url('{{asset('storage/'.
-                                   $product->image->path)}}');
-                                   width:50px;
-                                   height:50px;
-                                   background-position:center;
-                                   background-size:cover;
-                                   ">
+                <div class="mb-2">
+                    <label for="">Photo du Produit</label>
+                    @if ($product->image)
+                    <div class="col md-2">
+                        <img style="width: 50px; height:50px;" src="{{asset('storage/'.
+                        $product->image->path)}}" alt="">
+                        <a href="{{url('vendor/dashboard/article/delete/'.$product->id)}}">Supprimer</a>
                     </div>
+                    {{-- <div style="background-image: url('{{asset('storage/'.
+                    $product->image->path)}}');
+                    width:50px;
+                    height:50px;
+                    background-position:center;
+                    background-size:cover;
+                    ">
+                    </div> --}}
+                    @else
+                        <div style="color:red;">Aucune image du produit trouvée</div>
+                    @endif
+
+                </div>
+                <div class="form-control">
                     <input type="file" class="form-control" name="image" accept=".png, .jpg, .jpeg">
                 </div>
                 <div class="form-group mb-2">
