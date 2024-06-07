@@ -1,5 +1,12 @@
 <div class="col mb-5">
     <div class="card h-100">
+        <div style="margin:5px;
+                    border:1 solid white;
+                    border-radius:5px;
+                    background-color:black;
+                    color:{{$product->active ? 'white' : 'yellow'}};
+                    width:120px; height:35px; font-size:14px;"
+         class="card-header">{{$product->active ? 'Disponible' : 'Non disponible'}}</div>
         <!-- Product image-->
             @if ($product->image)
             <div style="background-image: url('{{asset('storage/'.$product->image->path)}}');
@@ -27,7 +34,8 @@
         <!-- Product actions-->
         {{-- @auth --}}
             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{route('order.payment',$product->id)}}">Payer</a></div>
+                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{route('detail.product',$product->id)}}">Detail du Produit</a></div>
+                {{-- <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{route('order.payment',$product->id)}}">Payer</a></div> --}}
             </div>
         {{-- @endauth --}}
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\Vendor\Product\ProductController;
 use App\Http\Controllers\Vendor\Product\PaiementController;
 use App\Http\Controllers\Vendor\Product\UserPaymentController;
 use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\StatusController;
 
 
 Route::get('/',[WebsiteController::class,'index'])->name('welcome');
@@ -25,7 +26,9 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/product/order/{id}',[UserPaymentController::class,'initPayment'])->name('order.payment');
 // Deconnexion
-Route::get('/deconnexion',[UserAuthController::class,'deconnexion'])->name('user.deconnexion');
+    Route::get('/deconnexion',[UserAuthController::class,'deconnexion'])->name('user.deconnexion');
+
+    Route::get('/detail/product/{id}',[ProductController::class, 'detail_product'])->name('detail.product');
 
 });
 
@@ -51,14 +54,17 @@ Route::middleware('vendor_middleware')->prefix('vendor/dashboard')->group(functi
         Route::put('update/{article}',[ProductController::class,'update'])->name('article.update');
         Route::get('delete/{article}',[ProductController::class,'delete'])->name('article.delete');
         Route::get('/delete/{path_image}',[ProductController::class,'destroy_image'])->name('image.delete');
-        Route::put('/update/status/{id}',[ProductController::class, 'update_status'])->name('article.status');
+        Route::get('/update/status/{id}',[ProductController::class, 'update_status'])->name('article.status');
 
     });
     Route::prefix('paiement')->group(function(){
         Route::get('/create',[PaiementController::class, 'index'])->name('config.create');
         Route::post('/handcreate',[PaiementController::class, 'store'])->name('config.store');
     });
-
+    Route::prefix('status')->group(function(){
+        Route::get('/create',[StatusController::class, 'create'])->name('stat.create');
+        // Route::get('/active/{id}',[StatusController::class,'update_status'])->name('stat.update');
+    });
 
     Route::get('/deconnexion',[VendorDashboard::class,'deconnexion'])->name('vendor.deconnexion');
 

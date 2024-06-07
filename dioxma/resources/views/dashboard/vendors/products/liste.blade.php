@@ -15,7 +15,7 @@
                             <th>Libelle du Produit</th>
                             <th>Description du Produit</th>
                             <th>Price</th>
-                            <th>Disponibilite</th>
+                            <th>Statut du Produit</th>
                             <th>Action</th>
 
                         </tr>
@@ -40,27 +40,13 @@
 
                             <td>{{$product->name}}</td>
                             <td>{{$product->description}}</td>
-                            <td>{{$product->price}}</td>
+                            <td>{{$product->price}} F CFA</td>
                             <td>
-                                <form action="{{route('article.status', $product->id)}}" method="POST">
-                                    @method('PUT')
-                                    @csrf
-
-                                    <a href="" type="submit" class="btn btn-sm btn-{{$product->active ? 'success' : 'danger'}}">
-                                        {{$product->active ? 'Disponible' : 'Non disponible'}}
-                                    </a>
-                                    {{--
-                                    <input type="checkbox" name="status" {{$product->active == '1' ? 'checked' : ''}}>
-                                    <label for="">{{$product->active ? 'Disponible' : 'Non disponible'}}</label> --}}
-
-                                    {{-- <div>
-                                        <a href="" type="submit" class="btn btn-sm btn-{{$product->active ? 'success' : 'danger'}}">
-                                            {{$product->active ? 'Disponible' : 'Non disponible'}}
-                                        </a>
-                                    </div> --}}
-                                </form>
-
-
+                                @if ($product->active == true)
+                                    <a style="border-radius: 15px;" href="{{route('article.status',$product->id)}}" class="btn btn-sm btn-primary">Disponible</a>
+                                @else
+                                <a style="border-radius: 15px;" href="{{route('article.status',$product->id)}}" class="btn btn-sm btn-danger">Non disponible</a>
+                                @endif
                             </td>
                             <td>
                                 <a href="{{route('article.edit',$product->id)}}"><span class="fa fa-edit"></span></a>

@@ -145,8 +145,29 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        dd($request);
 
+        if($product->active == true)
+        {
+            $status = false;
+        }
+        else
+        {
+            $status = true;
+        }
+
+        $product->update(['active' => $status]);
+
+        return redirect()->route('article.liste')->with('success', 'Le Statut du produit est mis à jour');
+
+    }
+    public function detail_product($id)
+    {
+        $detail = Product::with('vendeur')->findOrFail($id);
+
+        // dd($detail);
+        return view('details_product',[
+            'product'=> $detail,
+        ]);
     }
     public function delete(int $article)
     {

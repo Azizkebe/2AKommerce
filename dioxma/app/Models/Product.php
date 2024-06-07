@@ -14,4 +14,8 @@ class Product extends Model
     {
         return $this->belongsTo(CloudFile::class, 'cloudfile_id');
     }
+    public function vendeur()
+    {
+        return $this->belongsTo(Vendor::class, 'vendor_id');
+    }
 }

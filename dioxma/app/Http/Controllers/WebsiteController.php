@@ -10,7 +10,8 @@ class WebsiteController extends Controller
 {
     public function index()
     {
-        $products = Product::latest()->with('image')->paginate(20);
+        // $products = Product::latest()->with('image')->paginate(20);
+        $products = Product::where('active',true)->latest()->with('image')->paginate(20);
         return view('welcome',[
             'products'=> $products
         ]);

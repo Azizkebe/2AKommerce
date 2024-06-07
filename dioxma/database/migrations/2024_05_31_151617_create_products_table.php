@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('price');
             $table->unsignedBigInteger('vendor_id');
             $table->foreign('vendor_id')->references('id')->on('vendors');
+            $table->string('active')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });

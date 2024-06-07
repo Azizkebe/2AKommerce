@@ -30,7 +30,7 @@ class VendorAuthController extends Controller
                 'password'=>Hash::make($request->password),
 
             ]);
-            return redirect()->back()->with('success','Le compte du vendor est crée avec succes');
+            return redirect()->route('vendor.login')->with('success','Le compte du vendor est crée avec succes');
 
         }
         catch (Exception $e) {
