@@ -17,12 +17,21 @@
             background-size:cover;
             ">
             </div>
+
                 {{-- <img class="card-img-top" src="{{asset('storage/'.$product->image->path)}}" alt=""> --}}
             @else
             <img class="card-img-top" src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&name={{$product->name}}" alt="..." />
 
             @endif
         <!-- Product details-->
+
+        <div style="margin:auto;" class="row mb-1">
+            <form action="">
+                <input style="width: 50px;" class="form-style" type="number" name="number" value="0">
+                <input style="background-color:black; color:white;" class="form-style" type="submit" class="btn btn-sm btn-primary" value="Panier" name="" id="">
+            </form>
+
+        </div>
         <div class="card-body p-4">
             <div class="text-center">
                 <!-- Product name-->
@@ -31,6 +40,7 @@
                 {{$product->price}} FCFA
             </div>
         </div>
+
         <!-- Product actions-->
         {{-- @auth --}}
             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
