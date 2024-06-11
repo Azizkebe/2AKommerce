@@ -29,8 +29,9 @@ Route::middleware('auth')->group(function(){
     Route::get('/deconnexion',[UserAuthController::class,'deconnexion'])->name('user.deconnexion');
 
     Route::get('/detail/product/{id}',[ProductController::class, 'detail_product'])->name('detail.product');
-
+    Route::get('/add_cart/{id}/',[ProductController::class,'add_cart'])->name('add_cart.product');
 });
+
 
 //Route pour les vendors
 Route::prefix('vendor/account')->group(function(){

@@ -177,5 +177,20 @@ class ProductController extends Controller
 
         return redirect()->back()->with('success','Le produit a été supprimé avec succes');
     }
+    public function add_car($id)
+    {
+        if(Auth::id())
+        {
+            $user = Auth::user();
+
+            dd($user);
+
+            // return redirect()->back();
+
+        }
+        else{
+            return redirect()->route('login');
+        }
+    }
 
 }
