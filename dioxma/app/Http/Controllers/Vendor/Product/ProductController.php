@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use App\Models\CloudFile;
+use App\Models\Cart;
+use App\Models\User;
 
 use App\Models\Product;
 
@@ -177,15 +179,27 @@ class ProductController extends Controller
 
         return redirect()->back()->with('success','Le produit a été supprimé avec succes');
     }
-    public function add_car($id)
+    public function add_cart($id)
     {
         if(Auth::id())
         {
             $user = Auth::user();
+            $product = Product::findOrFail($id);
 
-            dd($user);
+            $cart = new Cart;
+            $cart->image = $product->cloudfile_id;
+            $cart->name = $user->name;
+            $cart->email = $user->email;
+            $cart->phone = $user->phone;
+            $cart->address = $user->address;
 
-            // return redirect()->back();
+            $cart->price = $product->price;
+            $cart->quantite = $product->quantite;
+            $cart->vendor= $product->vendor_id;
+
+            $cart->save();
+
+            return redirect()->back();
 
         }
         else{

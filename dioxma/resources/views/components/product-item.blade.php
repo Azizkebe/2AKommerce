@@ -26,7 +26,7 @@
         <!-- Product details-->
 
         <div style="margin:auto;" class="row mb-1">
-            <form action="{{route('add_cart.product',$product->id)}}">
+            <form action="{{route('add_cart.product', $product->id)}}">
                 <input style="width: 50px;" class="form-style" type="number" name="number" value="1" min="1">
                 <input style="background-color:black; color:white;" class="form-style" type="submit" class="btn btn-sm btn-primary" value="Ajouter Au Panier" name="" id="">
             </form>

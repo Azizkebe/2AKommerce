@@ -19,12 +19,24 @@ class UserAuthController extends Controller
     public function handregister(HandleRequest $request)
     {
         try {
-            //code...
-            User::create([
-                'name'=> $request->name,
-                'email'=> $request->email,
-                'password'=> Hash::make($request->password),
-            ]);
+
+            $user = new User;
+
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->phone = $request->phone;
+            $user->address = $request->address;
+
+            $user->save();
+
+            // User::create([
+            //     'name'=> $request->name,
+            //     'email'=> $request->email,
+            //     'phone'=> $request->phone,
+            //     'address'=> $request->address,
+            //     'password'=> Hash::make($request->password),
+            // ]);
 
             return redirect()->route('user.register')->with('success', 'le compte a été crée avec succéss');
 

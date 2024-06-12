@@ -42,6 +42,18 @@
                       <span class="error">{{$message}}</span>
                   @enderror
               </div>
+              <div class="mb-3">
+                <input type="number" class="form-control" id="phone" name="phone" placeholder="Telephone" value="{{old('phone')}}">
+                  @error('phone')
+                      <span class="error">{{$message}}</span>
+                  @enderror
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Adresse" value="{{old('address')}}">
+                  @error('address')
+                      <span class="error">{{$message}}</span>
+                  @enderror
+            </div>
             <div class="mb-3">
               <input type="password" class="form-control" id="password" name="password" placeholder="Mot de Passe" value="{{old('password')}}">
                 @error('password')
