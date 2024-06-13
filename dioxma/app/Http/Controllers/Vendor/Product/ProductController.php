@@ -37,6 +37,7 @@ class ProductController extends Controller
                 'description'=> $request->description,
                 'price'=> $request->price,
                 'vendor_id' => auth('vendor')->user()->id,
+                'quantity'=> $request->quantity,
 
 
             ];
@@ -179,7 +180,7 @@ class ProductController extends Controller
 
         return redirect()->back()->with('success','Le produit a été supprimé avec succes');
     }
-    public function add_cart($id)
+    public function add_cart($id, Request $request)
     {
         if(Auth::id())
         {
@@ -194,9 +195,11 @@ class ProductController extends Controller
             $cart->address = $user->address;
 
             $cart->price = $product->price;
-            $cart->quantite = $product->quantite;
-            $cart->vendor= $product->vendor_id;
+            $cart->number = $request->number;
+            $cart->User_id= $user->id;
+            $cart->Product_id= $product->id;
 
+            // dd($cart);
             $cart->save();
 
             return redirect()->back();
@@ -205,6 +208,14 @@ class ProductController extends Controller
         else{
             return redirect()->route('login');
         }
+    }
+    public function show_cart()
+    {
+        $id = Auth::user()->id;
+
+        $cart = Cart::where('User_id', $id)->get();
+
+        return view('show_detail',compact('cart'));
     }
 
 }

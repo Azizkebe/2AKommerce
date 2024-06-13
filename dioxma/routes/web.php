@@ -8,7 +8,7 @@ use App\Http\Controllers\Vendor\Product\ProductController;
 use App\Http\Controllers\Vendor\Product\PaiementController;
 use App\Http\Controllers\Vendor\Product\UserPaymentController;
 use App\Http\Controllers\WebsiteController;
-use App\Http\Controllers\StatusController;
+// use App\Http\Controllers\StatusController;
 
 
 Route::get('/',[WebsiteController::class,'index'])->name('welcome');
@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/detail/product/{id}',[ProductController::class, 'detail_product'])->name('detail.product');
     Route::get('/add_cart/{id}/',[ProductController::class,'add_cart'])->name('add_cart.product');
+    Route::get('/show_cart',[ProductController::class,'show_cart'])->name('show_cart.product');
 });
 
 
@@ -62,10 +63,10 @@ Route::middleware('vendor_middleware')->prefix('vendor/dashboard')->group(functi
         Route::get('/create',[PaiementController::class, 'index'])->name('config.create');
         Route::post('/handcreate',[PaiementController::class, 'store'])->name('config.store');
     });
-    Route::prefix('status')->group(function(){
-        Route::get('/create',[StatusController::class, 'create'])->name('stat.create');
-        // Route::get('/active/{id}',[StatusController::class,'update_status'])->name('stat.update');
-    });
+    // Route::prefix('status')->group(function(){
+    //     Route::get('/create',[StatusController::class, 'create'])->name('stat.create');
+    //     // Route::get('/active/{id}',[StatusController::class,'update_status'])->name('stat.update');
+    // });
 
     Route::get('/deconnexion',[VendorDashboard::class,'deconnexion'])->name('vendor.deconnexion');
 

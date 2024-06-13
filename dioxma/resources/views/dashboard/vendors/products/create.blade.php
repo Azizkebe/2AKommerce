@@ -47,6 +47,13 @@
                     @enderror
                 </div>
                 <div class="form-group mb-2">
+                    <label for="">Quantite du Produit</label>
+                    <input type="number" class="form-control" name="quantity">
+                    @error('quantity')
+                       <div style="color:red;">{{$message}}</div>
+                    @enderror
+                </div>
+                <div class="form-group mb-2">
                     <input type="submit" class="btn btn-primary" value="Enregistrer le Produit">
                 </div>
             </form>

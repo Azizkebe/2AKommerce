@@ -16,11 +16,18 @@
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex">
+            {{-- <li style="display: none;" class="nav-item">
+                <a href="" class="btn btn-primary"> Panier
+                <i class="bi-cart-fill me-1"></i>
+
+                <span style="color:blue;" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                </a>
+            </li> --}}
+            <form class="d-flex" action="{{route('show_cart.product')}}">
                 <button class="btn btn-outline-dark" type="submit">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
                 </button>
             </form>
             @guest

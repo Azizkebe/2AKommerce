@@ -15,6 +15,7 @@
                             <th>Libelle du Produit</th>
                             <th>Description du Produit</th>
                             <th>Price</th>
+                            <th>Quantite disponible</th>
                             <th>Statut du Produit</th>
                             <th>Action</th>
 
@@ -41,6 +42,7 @@
                             <td>{{$product->name}}</td>
                             <td>{{$product->description}}</td>
                             <td>{{$product->price}} F CFA</td>
+                            <td>{{$product->quantity ?? '0'}} article(s)</td>
                             <td>
                                 @if ($product->active == true)
                                     <a style="border-radius: 15px;" href="{{route('article.status',$product->id)}}" class="btn btn-sm btn-primary">Disponible</a>

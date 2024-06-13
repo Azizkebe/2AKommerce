@@ -24,6 +24,7 @@ class ArticleStoreRequest extends FormRequest
         return [
             'name'=>'required',
             'price'=>'required|integer',
+            'quantity'=>'required|integer',
 
         ];
     }
@@ -32,6 +33,8 @@ class ArticleStoreRequest extends FormRequest
             'name.required'=>'Mettez le nom du produit',
             'price.required'=>'Le prix du produit est requis',
             'price.integer'=>'Le prix renseigné pas correcte',
+            'quantity.integer'=>'La quantite renseignée pas correcte',
+            'quantity.required'=>'La quantite est requise',
         ];
     }
 }
