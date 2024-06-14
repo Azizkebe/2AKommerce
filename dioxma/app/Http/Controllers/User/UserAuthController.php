@@ -9,6 +9,7 @@ use App\Http\Requests\HandloginRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Cart;
 
 class UserAuthController extends Controller
 {
@@ -47,7 +48,19 @@ class UserAuthController extends Controller
     }
     public function login()
     {
-        return view('auth.user.login');
+        if(Auth::id())
+        {
+            $cart = Cart::where('User_id','=',$id)->count();
+            return view('auth.user.login',compact('cart'));
+        }
+        else{
+
+            $cart = 0;
+            return view('auth.user.login',compact('cart'));
+
+
+        }
+
     }
     public function handlogin(HandloginRequest $request)
     {
