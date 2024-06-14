@@ -17,7 +17,9 @@ class VendorAuthController extends Controller
     }
     public function register()
     {
-        return view('auth.vendor.register');
+
+            return view('auth.vendor.register');
+
     }
     public function handregister(HandRegisterVendorRequest $request)
     {

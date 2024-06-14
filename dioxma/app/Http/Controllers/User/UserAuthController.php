@@ -15,7 +15,17 @@ class UserAuthController extends Controller
 {
     public function register()
     {
-        return view('auth.user.register');
+        if(Auth::id())
+        {
+            $id = Auth::user()->id;
+            $cart = Cart::where('User_id','=',$id)->count();
+            return view('auth.user.register', compact('cart'));
+        }
+        else
+        {
+            $cart = 0;
+            return view('auth.user.register', compact('cart'));
+        }
     }
     public function handregister(HandleRequest $request)
     {
@@ -39,7 +49,7 @@ class UserAuthController extends Controller
             //     'password'=> Hash::make($request->password),
             // ]);
 
-            return redirect()->route('user.register')->with('success', 'le compte a été crée avec succéss');
+            return redirect()->route('login')->with('success', 'le compte a été crée avec succéss');
 
         } catch (Exception $e) {
             throw new Exception("Erreur survenue lors de la creation du compte", 1);

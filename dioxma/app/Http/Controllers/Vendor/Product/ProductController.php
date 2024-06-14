@@ -165,12 +165,18 @@ class ProductController extends Controller
     }
     public function detail_product($id)
     {
-        $detail = Product::with('vendeur')->findOrFail($id);
+        if(Auth::id())
+        {
+            $id = Auth::user()->id;
+            $cart = Cart::where('User_id','=',$id)->count();
+            $detail = Product::with('vendeur')->findOrFail($id);
+            return view('details_product',[
+                'product'=> $detail,
+                'cart'=> $cart
+            ]);
+        }
 
-        // dd($detail);
-        return view('details_product',[
-            'product'=> $detail,
-        ]);
+
     }
     public function delete(int $article)
     {
