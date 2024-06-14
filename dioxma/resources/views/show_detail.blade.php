@@ -24,7 +24,8 @@
                 </thead>
                 <tbody>
                     <?php $total_price=0; ?>
-                    @foreach ($cart as $cart)
+                    {{-- @foreach () --}}
+                        @forelse ($cart as $cart)
                         <tr>
                             <td class="p-4">
                                 <div class="media align-items-center">
@@ -44,13 +45,18 @@
                             <td class="align-middle p-4"><input type="text" class="form-control text-center" value="{{$cart->number}}"></td>
                             <td class="text-right font-weight-semibold align-middle p-4">{{$cart->price * $cart->number}}</td>
                             <td class="text-center align-middle px-0">
-                                <a href="#" class="shop-tooltip close float-none text-succes" title="" data-original-title="edit">!</a>
-                                &nbsp;&nbsp;&nbsp;
-                                <a onclick="return confirm('Etes vous sure de vouloir supprimer la commande')" href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a>&nbsp;&nbsp;
+                                {{-- <a href="" class="btn btn-sm btn-success">Editer</a>
+                                &nbsp;&nbsp;&nbsp; --}}
+                                <a onclick="return confirm('Etes vous sure de vouloir supprimer la commande')" href="{{route('delete_cart.product',$cart->id)}}" class="btn btn-sm btn-danger">Supprimer</a>&nbsp;&nbsp;
                             </td>
                         </tr>
                         <?php $total_price = $total_price + ($cart->price*$cart->number) ?>
-                    @endforeach
+
+                        @empty
+                        <td style="color:red; text-align:center;" colspan="5">Le panier est vide</td>
+                            {{-- <p colspan="5"></p> --}}
+                        @endforelse
+                    {{-- @endforeach --}}
                 </tbody>
               </table>
             </div>

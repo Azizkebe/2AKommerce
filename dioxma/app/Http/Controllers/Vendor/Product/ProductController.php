@@ -121,8 +121,6 @@ class ProductController extends Controller
         $deleteImage = CloudFile::findOrFail($path_image);
         $productdata = Product::findOrFail($path_image);
 
-
-
         // dd($productdata);
 
         if($deleteImage->path) {
@@ -165,18 +163,11 @@ class ProductController extends Controller
     }
     public function detail_product($id)
     {
-        if(Auth::id())
-        {
-            $id = Auth::user()->id;
-            $cart = Cart::where('User_id','=',$id)->count();
-            $detail = Product::with('vendeur')->findOrFail($id);
-            return view('details_product',[
-                'product'=> $detail,
-                'cart'=> $cart
-            ]);
-        }
 
-
+        $detail = Product::with('vendeur')->findOrFail($id);
+        return view('details_product',[
+            'product'=> $detail
+        ]);
     }
     public function delete(int $article)
     {
@@ -217,11 +208,29 @@ class ProductController extends Controller
     }
     public function show_cart()
     {
-        $id = Auth::user()->id;
+        if(Auth::id())
+        {
+            $id = Auth::user()->id;
 
-        $cart = Cart::where('User_id', $id)->get();
+            $cart = Cart::where('User_id', $id)->get();
+            // $compte_cart = Cart::where('User_id', $id)->count();
 
-        return view('show_detail',compact('cart'));
+            return view('show_detail',[
+
+                'cart'=>$cart,
+                // 'cart_compte'=> $compte_cart,
+            ]);
+        }
+
+
+    }
+    public function delete_cart($id)
+    {
+        $cart = Cart::findOrFail($id);
+
+        $cart->delete();
+
+        return redirect()->back()->with('success','La commande a été supprimée avec succes');
     }
 
 }

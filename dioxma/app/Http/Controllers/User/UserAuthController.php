@@ -18,7 +18,7 @@ class UserAuthController extends Controller
         if(Auth::id())
         {
             $id = Auth::user()->id;
-            $cart = Cart::where('User_id','=',$id)->count();
+            $cart = Cart::where('User_id','=',$id)->get();
             return view('auth.user.register', compact('cart'));
         }
         else
@@ -41,14 +41,6 @@ class UserAuthController extends Controller
 
             $user->save();
 
-            // User::create([
-            //     'name'=> $request->name,
-            //     'email'=> $request->email,
-            //     'phone'=> $request->phone,
-            //     'address'=> $request->address,
-            //     'password'=> Hash::make($request->password),
-            // ]);
-
             return redirect()->route('login')->with('success', 'le compte a été crée avec succéss');
 
         } catch (Exception $e) {
@@ -60,7 +52,7 @@ class UserAuthController extends Controller
     {
         if(Auth::id())
         {
-            $cart = Cart::where('User_id','=',$id)->count();
+            $cart = Cart::where('User_id','=',$id)->get();
             return view('auth.user.login',compact('cart'));
         }
         else{

@@ -32,6 +32,8 @@
                     <p class="vote"><strong>Quantite:</strong><span style="color:red;">12</span></p>
                     <div class="row">
                         <form action="{{route('add_cart.product',$product->id)}}">
+                            @csrf
+                            @method('POST')
                             <input type="number" name="number" value="1">
                             <input type="submit" class="btn btn-sm btn-primary" value="Ajouter au Panier" name="" id="">
                         </form>
