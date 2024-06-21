@@ -163,11 +163,19 @@ class ProductController extends Controller
     }
     public function detail_product($id)
     {
+        if(Auth::id())
+        {
+            $id = Auth::user()->id;
 
-        $detail = Product::with('vendeur')->findOrFail($id);
-        return view('details_product',[
-            'product'=> $detail
-        ]);
+            $cart = Cart::where('user_id','=',$id)->count();
+
+            $detail = Product::with('vendeur')->findOrFail($id);
+
+            return view('details_product',[
+                'product'=> $detail,
+                'cart'=> $cart,
+            ]);
+        }
     }
     public function delete(int $article)
     {
@@ -212,16 +220,19 @@ class ProductController extends Controller
         {
             $id = Auth::user()->id;
 
-            $cart = Cart::where('User_id', $id)->get();
-            // $compte_cart = Cart::where('User_id', $id)->count();
+            $cart = Cart::where('User_id','=',$id)->get();
+            $cartid = Cart::where('User_id','=',$id)->count();
 
             return view('show_detail',[
 
-                'cart'=>$cart,
-                // 'cart_compte'=> $compte_cart,
+                'carts'=>$cart,
+                'cart'=>$cartid,
+
             ]);
         }
-
+        else{
+            return view('login');
+        }
 
     }
     public function delete_cart($id)

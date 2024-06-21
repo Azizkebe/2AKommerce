@@ -25,7 +25,7 @@
                 <tbody>
                     <?php $total_price=0; ?>
                     {{-- @foreach () --}}
-                        @forelse ($cart as $cart)
+                        @forelse ($carts as $cart)
                         <tr>
                             <td class="p-4">
                                 <div class="media align-items-center">

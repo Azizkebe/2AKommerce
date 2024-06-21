@@ -23,13 +23,22 @@
                 <span style="color:blue;" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </a>
             </li> --}}
-            <form class="d-flex" action="{{route('show_cart.product')}}">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="btn btn-outline-dark" href="{{route('show_cart.product')}}"> Panier
+                        <i class="fa fa-shopping-bag"></i>
+
+                        <span style="color:blue;" class="badge bg-dark text-white ms-1 rounded-pill">{{$cart}}</span>
+                    </a>
+                </li>
+            </ul>
+            {{-- <form class="d-flex" action="{{route('show_cart.product')}}">
                 <button class="btn btn-outline-dark" type="submit">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">{{$cart->count() ?? $cart=0}}</span>
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">{{$cart}}</span>
                 </button>
-            </form>
+            </form> --}}
             @guest
             <div style="margin-left: 1rem;">
                 <li class="nav-item dropdown" style="list-style-type: none;">

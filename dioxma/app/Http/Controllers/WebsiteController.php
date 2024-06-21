@@ -22,7 +22,7 @@ class WebsiteController extends Controller
 
             $id = Auth::user()->id;
 
-            $cart = Cart::where('user_id','=',$id)->get();
+            $cart = Cart::where('user_id','=',$id)->count();
 
                 return view('welcome',[
                     'products'=> $products,
