@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\ConfigPayRequest;
 use App\Models\PaymentGateway;
+use App\Models\Command;
 
 class PaiementController extends Controller
 {
@@ -55,4 +56,37 @@ class PaiementController extends Controller
 
         }
     }
+    public function commande()
+    {
+        try {
+            $ListeCommand = Command::where('vendor_id', auth('vendor')->user()->id)->get();
+
+            return view('dashboard.vendors.commande.liste',[
+                'commandes'=>$ListeCommand,
+             ]);
+
+        } catch (Exception $th) {
+            throw new Exception("Erreur survenue à l'affichage de la liste des commande", 1);
+
+        }
+    }
+    public function livraison($commande)
+    {
+       try {
+        $commande = Command::findorFail($commande);
+
+        $commande->livraison_status = "Produit Livré";
+
+        $commande->paiement_status = "Payé";
+
+        $commande->save();
+
+        return redirect()->back()->with('success','Bravo le statut a été changé');
+
+       } catch (Exception $e) {
+            throw new Exception("Erreur survenue lors du changement de status", 1);
+
+       }
+    }
+
 }

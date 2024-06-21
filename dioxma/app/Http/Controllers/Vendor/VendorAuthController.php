@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Vendor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Vendor;
+use App\Models\Command;
 use App\Http\Requests\HandRegisterVendorRequest;
 use App\Http\Requests\HandLoginVendorRequest;
 
@@ -13,7 +15,12 @@ class VendorAuthController extends Controller
 {
     public function login()
     {
-        return view('auth.vendor.login');
+
+            $cart = 0;
+
+        return view('auth.vendor.login',[
+            'cart'=>$cart,
+        ]);
     }
     public function register()
     {
@@ -58,4 +65,5 @@ class VendorAuthController extends Controller
 
         }
     }
+
 }

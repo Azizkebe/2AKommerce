@@ -12,9 +12,11 @@ class ProductItem extends Component
      * Create a new component instance.
      */
     public $product;
+    public $cart;
     public function __construct($product)
     {
         $this->product = $product;
+        $this->cart = $cart;
     }
 
     /**

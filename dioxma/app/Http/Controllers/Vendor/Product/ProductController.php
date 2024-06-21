@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\CloudFile;
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Command;
 
 use App\Models\Product;
 
@@ -203,6 +204,7 @@ class ProductController extends Controller
             $cart->number = $request->number;
             $cart->User_id= $user->id;
             $cart->Product_id= $product->id;
+            $cart_vendor_id = $product->vendor_id;
 
             // dd($cart);
             $cart->save();
@@ -244,4 +246,63 @@ class ProductController extends Controller
         return redirect()->back()->with('success','La commande a été supprimée avec succes');
     }
 
+    public function cash_delivery()
+    {
+        try {
+
+            if(Auth::id())
+            {
+
+                $user = Auth::user();
+
+                $userid = $user->id;
+
+                $cart = Cart::where('User_id',$userid)->get();
+
+                if($cart->count() >= 1)
+                {
+
+                    foreach ($cart as $cart) {
+
+                        $commande =new Command();
+
+                    $commande->name = $cart->name;
+                    $commande->email = $cart->email;
+                    $commande->phone = $cart->phone;
+                    $commande->address = $cart->address;
+                    $commande->quantity = $cart->number;
+                    $commande->image = $cart->image;
+                    $commande->price = $cart->price;
+                    $commande->product_id = $cart->Product_id;
+                    $commande->User_id =  $cart->User_id;
+
+                    $commande->paiement_status = 'Paiement à la livraison';
+                    $commande->livraison_status = 'En cours';
+
+                    $commande->save();
+
+                    $cart_id = $cart->id;
+                    $cart = Cart::findorFail($cart_id);
+
+                    $cart->delete();
+
+                    }
+                    return redirect()->back()->with('success','Nous avons reçu vos commandes. Nous vous conctactons dans moins de 24H');
+                }
+                else
+                {
+                    return redirect()->back()->with('error','Désolé! Aucune Commande n\'a été passée');
+                }
+
+            }
+            else
+            {
+                return redirect('login');
+            }
+        } catch (Exception $e) {
+            //throw $th;
+            throw new Exception("Erreur survenue lors de l'enregistrement de la commande", 1);
+
+        }
+    }
 }

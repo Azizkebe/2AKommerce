@@ -10,6 +10,19 @@
             <h2>Mon Panier</h2>
         </div>
         <div class="card-body">
+
+                @if (session('success'))
+
+                <div class=" alert alert-success mt-2 p-2">
+                    {{session('success')}}
+                </div>
+
+                @endif
+                @if (session('error'))
+                <div class="alert alert-danger">{{session('error')}}</div>
+
+                @endif
+
             <div class="table-responsive">
               <table class="table table-bordered m-0">
                 <thead>
@@ -73,7 +86,8 @@
 
             <div style="display:flex; justify-content:flex-end;">
               <button style="margin-right: 4px;" type="button" class="btn btn-sm btn-secondary md-btn-flat mt-2 mr-3">Par Wave, Orange Money, Free Money, ..</button>
-              <button type="button" class="btn btn-sm btn-primary mt-2">Paiement à la livraison</button>
+              <a href="{{route('cash_delivery')}}" class="btn btn-sm btn-primary mt-2">Payer à la livraison</a>
+              {{-- <button type="button" class="btn btn-sm btn-primary mt-2">Paiement à la livraison</button> --}}
             </div>
 
           </div>

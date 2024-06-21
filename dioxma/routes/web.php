@@ -25,6 +25,7 @@ Route::middleware('guest')->group(function(){
 Route::middleware('auth')->group(function(){
 
     Route::get('/product/order/{id}',[UserPaymentController::class,'initPayment'])->name('order.payment');
+
 // Deconnexion
     Route::get('/deconnexion',[UserAuthController::class,'deconnexion'])->name('user.deconnexion');
 
@@ -32,6 +33,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/add_cart/{id}/',[ProductController::class,'add_cart'])->name('add_cart.product');
     Route::get('/show_cart',[ProductController::class,'show_cart'])->name('show_cart.product');
     Route::get('/delete_cart/{id}',[ProductController::class,'delete_cart'])->name('delete_cart.product');
+    Route::get('/cash_delivery',[ProductController::class, 'cash_delivery'])->name('cash_delivery');
+
 });
 
 
@@ -63,6 +66,11 @@ Route::middleware('vendor_middleware')->prefix('vendor/dashboard')->group(functi
     Route::prefix('paiement')->group(function(){
         Route::get('/create',[PaiementController::class, 'index'])->name('config.create');
         Route::post('/handcreate',[PaiementController::class, 'store'])->name('config.store');
+        Route::get('/commande',[PaiementController::class,'commande'])->name('vendor.commande');
+        Route::get('/livraison/{commande}',[PaiementController::class,'livraison'])->name('commande.livraison');
+
+        // Route::get('/cash_delivery',[PaiementController::class, 'cash_delivery'])->name('cash_delivery');
+
     });
     // Route::prefix('status')->group(function(){
     //     Route::get('/create',[StatusController::class, 'create'])->name('stat.create');
