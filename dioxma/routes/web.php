@@ -56,7 +56,7 @@ Route::middleware('vendor_middleware')->prefix('vendor/dashboard')->group(functi
         Route::post('/create',[ProductController::class,'store'])->name('article.store');
         Route::get('/liste',[ProductController::class,'liste'])->name('article.liste');
         Route::get('edit/{article}',[ProductController::class,'edit'])->name('article.edit');
-        Route::get('edit/{article}',[ProductController::class,'edit'])->name('article.edit');
+        // Route::get('edit/{article}',[ProductController::class,'edit'])->name('article.edit');
         Route::put('update/{article}',[ProductController::class,'update'])->name('article.update');
         Route::get('delete/{article}',[ProductController::class,'delete'])->name('article.delete');
         Route::get('/delete/{path_image}',[ProductController::class,'destroy_image'])->name('image.delete');
