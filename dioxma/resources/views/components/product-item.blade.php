@@ -6,7 +6,9 @@
                     background-color:black;
                     color:{{$product->active ? 'white' : 'yellow'}};
                     width:120px; height:35px; font-size:14px;"
-         class="card-header">{{$product->active ? 'Disponible' : 'Non disponible'}}</div>
+         class="card-header">
+         {{$product->active ? 'Disponible' : 'Non disponible'}}
+        </div>
         <!-- Product image-->
             @if ($product->image)
             <div style="background-image: url('{{asset('storage/'.$product->image->path)}}');
